@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="rose-gold" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shital Beauty Parlor & Stitching Studio</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Poppins:wght@400;500;600;700&family=Great+Vibes&family=Pacifico&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: 'var(--color-50)',
+                            100: 'var(--color-100)',
+                            200: 'var(--color-200)',
+                            500: 'var(--color-500)',
+                            600: 'var(--color-600)',
+                            700: 'var(--color-700)',
+                            800: 'var(--color-800)',
+                            900: 'var(--color-900)',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['var(--font-primary, "Inter")', 'sans-serif'],
+                        cursive: ['var(--font-secondary, "Dancing Script")', 'cursive'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 8s linear infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --font-base-size: 18px;
+            --font-primary: 'Inter', sans-serif;
+            --font-secondary: 'Dancing Script', cursive;
+        }
+
+        /* 9 LUXURY PALETTES */
+        :root[data-theme="rose-gold"] {
+            --color-50: #fff5f7; --color-100: #ffe3ec; --color-200: #fcc2d7;
+            --color-500: #f06595; --color-600: #e64980; --color-700: #d6336c;
+            --color-800: #c2255c; --color-900: #9c1e48;
+        }
+        :root[data-theme="royal-emerald"] {
+            --color-50: #e6fcf5; --color-100: #c3fae8; --color-200: #96f2d7;
+            --color-500: #20c997; --color-600: #12b886; --color-700: #0ca678;
+            --color-800: #099268; --color-900: #087f5b;
+        }
+        :root[data-theme="royal-gold"] {
+            --color-50: #fff9db; --color-100: #fff3bf; --color-200: #ffe066;
+            --color-500: #fcc419; --color-600: #fab005; --color-700: #f59f00;
+            --color-800: #f08c00; --color-900: #e67700;
+        }
+        :root[data-theme="amethyst-violet"] {
+            --color-50: #f8f0fc; --color-100: #f3d9fa; --color-200: #eebefa;
+            --color-500: #cc5de8; --color-600: #be4bdb; --color-700: #ae3ec9;
+            --color-800: #9c36b5; --color-900: #862e9c;
+        }
+        :root[data-theme="sapphire-breeze"] {
+            --color-50: #e7f5ff; --color-100: #d0ebff; --color-200: #a5d8ff;
+            --color-500: #4dabf7; --color-600: #339af0; --color-700: #228be6;
+            --color-800: #1c7ed6; --color-900: #1971c2;
+        }
+        :root[data-theme="ruby-crimson"] {
+            --color-50: #fff5f5; --color-100: #ffe3e3; --color-200: #ffc9c9;
+            --color-500: #ff6b6b; --color-600: #fa5252; --color-700: #f03e3e;
+            --color-800: #e03131; --color-900: #c92a2a;
+        }
+        :root[data-theme="emerald-mint"] {
+            --color-50: #ebfbee; --color-100: #d3f9d8; --color-200: #b2f2bb;
+            --color-500: #51cf66; --color-600: #40c057; --color-700: #37b24d;
+            --color-800: #2f9e44; --color-900: #2b8a3e;
+        }
+        :root[data-theme="sunset-bronze"] {
+            --color-50: #fff4e6; --color-100: #ffe8cc; --color-200: #ffd8a8;
+            --color-500: #ff922b; --color-600: #fd7e14; --color-700: #f76707;
+            --color-800: #e8590c; --color-900: #d9480f;
+        }
+        :root[data-theme="neon-cyber-pink"] {
+            --color-50: #fff0f6; --color-100: #ffdeeb; --color-200: #fcc2d7;
+            --color-500: #f783ac; --color-600: #f06595; --color-700: #e64980;
+            --color-800: #d6336c; --color-900: #a61e4d;
+        }
+
+        html {
+            font-size: var(--font-base-size);
+        }
+
+        body, input, button, select, textarea {
+            font-family: var(--font-primary, 'Inter', sans-serif);
+        }
+        .font-cursive {
+            font-family: var(--font-secondary, 'Dancing Script', cursive) !important;
+        }
+
+        /* Glassmorphism Styling */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(25px) saturate(200%);
+            -webkit-backdrop-filter: blur(25px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(25px) saturate(200%);
+            -webkit-backdrop-filter: blur(25px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Accessibility Overrides */
+        .high-contrast { filter: contrast(140%); }
+        .grayscale-filter { filter: grayscale(100%); }
+
+        /* OWL CAROUSEL STYLE CENTER WITH LOOP SLIDER */
+        .owl-viewport {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+            padding: 2rem 0;
+            cursor: grab;
+        }
+        .owl-viewport:active {
+            cursor: grabbing;
+        }
+        .owl-stage {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform;
+        }
+        .owl-item {
+            flex: 0 0 300px;
+            margin: 0 12px;
+            transition: all 0.4s ease-out;
+            opacity: 0.5;
+            transform: scale(0.88);
+            filter: blur(1px);
+        }
+        @media (min-width: 640px) {
+            .owl-item { flex: 0 0 380px; margin: 0 16px; }
+        }
+        @media (min-width: 1024px) {
+            .owl-item { flex: 0 0 440px; margin: 0 20px; }
+        }
+
+        .owl-item.center {
+            opacity: 1 !important;
+            transform: scale(1.08) !important;
+            filter: blur(0px) !important;
+            z-index: 20;
+        }
+        .owl-item.center .glass-card {
+            border-color: var(--color-500) !important;
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.15), 0 0 20px 2px var(--color-200);
+        }
+        .dark .owl-item.center .glass-card {
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5), 0 0 25px 3px rgba(240, 101, 149, 0.25);
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--color-500); border-radius: 9999px; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden selection:bg-brand-500 selection:text-white">
+
+    <header class="sticky top-0 z-40 w-full glass-card shadow-sm transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Studio Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-brand-600 to-brand-500 text-white flex items-center justify-center font-cursive text-2xl font-bold shadow-lg shadow-brand-500/30 group-hover:scale-105 transition-transform">
+                    S
+                </div>
+                <div>
+                    <span class="text-xl md:text-2xl font-bold font-cursive tracking-wider bg-gradient-to-r from-brand-700 to-brand-500 bg-clip-text text-transparent block">Shital Studio</span>
+                    <span class="text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400 font-semibold block -mt-1">Beauty Parlor & Stitching</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Menu -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold">
+                <a href="#about" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">About Us</a>
+                <a href="#beauty-services" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Beauty Parlour</a>
+                <a href="#stitching-services" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Tailoring & Stitching</a>
+                <a href="#portfolio" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Portfolio</a>
+                <a href="#reviews" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Reviews</a>
+                <a href="#booking" class="bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-700 hover:to-brand-600 text-white px-5 py-2.5 rounded-full font-bold shadow-md shadow-brand-500/20 hover:shadow-lg transition-all flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Book Appointment
+                </a>
+            </nav>
+
+            <!-- Mobile Drawer Button -->
+            <button id="mobileMenuBtn" class="md:hidden p-2.5 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 focus:outline-none" aria-label="Toggle Mobile Navigation Menu">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <div id="drawerOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+    <div id="mobileDrawer" class="fixed top-0 left-0 bottom-0 w-80 max-w-[85vw] bg-white dark:bg-slate-900 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out shadow-2xl flex flex-col justify-between overflow-y-auto">
+        <div class="p-6">
+            <div class="flex items-center justify-between pb-6 border-b border-slate-100 dark:border-slate-800">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-brand-600 text-white flex items-center justify-center font-cursive text-xl font-bold">S</div>
+                    <span class="font-bold text-lg font-cursive text-brand-600">Shital Studio</span>
+                </div>
+                <button id="closeDrawerBtn" class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- 1. NAVIGATION MENU LINKS -->
+            <nav class="mt-6 flex flex-col gap-2 font-medium text-slate-700 dark:text-slate-200">
+                <a href="#about" class="drawer-link py-2.5 px-3 rounded-xl hover:bg-brand-50 dark:hover:bg-slate-800 hover:text-brand-600 transition-colors">About Us</a>
+                <a href="#beauty-services" class="drawer-link py-2.5 px-3 rounded-xl hover:bg-brand-50 dark:hover:bg-slate-800 hover:text-brand-600 transition-colors">Beauty Parlour Services</a>
+                <a href="#stitching-services" class="drawer-link py-2.5 px-3 rounded-xl hover:bg-brand-50 dark:hover:bg-slate-800 hover:text-brand-600 transition-colors">Stitching & Tailoring</a>
+                <a href="#portfolio" class="drawer-link py-2.5 px-3 rounded-xl hover:bg-brand-50 dark:hover:bg-slate-800 hover:text-brand-600 transition-colors">Design Gallery</a>
+                <a href="#reviews" class="drawer-link py-2.5 px-3 rounded-xl hover:bg-brand-50 dark:hover:bg-slate-800 hover:text-brand-600 transition-colors">Client Reviews</a>
+            </nav>
+
+            <!-- 2. LIGHT / DARK MODE & THEME CONTROLS IN MENU (SECOND TIME DISPLAY RIGHT AFTER MENU LINKS) -->
+            <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800">
+                <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-moon text-brand-500"></i> Mode & Theme Settings
+                </p>
+
+                <!-- Light / Dark Mode Toggle inside Drawer -->
+                <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-100 dark:bg-slate-800 mb-4">
+                    <span class="text-xs font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-sun text-amber-500 dark:hidden"></i>
+                        <i class="fa-solid fa-moon text-indigo-400 hidden dark:inline"></i>
+                        Light / Dark Mode
+                    </span>
+                    <button class="darkToggleBtnSecondary w-12 h-6 rounded-full bg-slate-300 dark:bg-brand-600 relative p-0.5 transition-colors">
+                        <div class="w-5 h-5 rounded-full bg-white shadow-md transform dark:translate-x-6 transition-transform"></div>
+                    </button>
+                </div>
+
+                <!-- Color Theme Palettes inside Drawer -->
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">Accent Theme Color</label>
+                <div class="grid grid-cols-5 gap-2" id="drawerQuickThemes">
+                    <!-- Dynamic Palette Pickers Rendered Here -->
+                </div>
+            </div>
+
+            <!-- 3. CONTACT & WHATSAPP CTA BUTTON -->
+            <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+                <a href="#booking" class="drawer-link py-3 px-4 rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 text-white font-bold text-center shadow-md flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Book Appointment
+                </a>
+            </div>
+        </div>
+
+        <div class="p-6 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-400 text-center">
+            &copy; 2026 Shital Beauty Parlor & Stitching
+        </div>
+    </div>
+
+    <section class="relative pt-10 pb-16 md:pt-20 md:pb-28 overflow-hidden bg-gradient-to-b from-brand-50/50 to-transparent dark:from-brand-950/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left">
+                    <span class="inline-block px-4 py-1.5 rounded-full bg-brand-100 dark:bg-brand-900/40 text-brand-700 dark:text-brand-300 text-xs font-extrabold tracking-widest uppercase mb-4 shadow-sm">
+                        ✨ Glamour Salon & Custom Tailoring
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+                        Elegance Redefined <br class="hidden sm:inline">
+                        <span class="font-cursive text-brand-600 dark:text-brand-500 text-5xl sm:text-6xl lg:text-7xl block mt-2">Shine with Confidence</span>
+                    </h1>
+                    <p class="mt-6 text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-xl mx-auto lg:mx-0">
+                        Experience premier beauty treatments & bespoke boutique stitching tailored exclusively to elevate your unique grace and traditional style.
+                    </p>
+                    <div class="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#booking" class="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-600 hover:bg-brand-700 text-white font-bold shadow-lg shadow-brand-500/30 transition-all hover:scale-105 text-center flex items-center justify-center gap-3">
+                            <i class="fa-brands fa-whatsapp text-xl"></i> Book WhatsApp Appointment
+                        </a>
+                        <a href="#beauty-services" class="w-full sm:w-auto px-8 py-4 rounded-full border-2 border-slate-300 dark:border-slate-700 hover:border-brand-500 font-semibold text-center transition-all">
+                            Explore All Services
+                        </a>
+                    </div>
+                </div>
+                <div class="relative flex justify-center">
+                    <div class="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-slate-800">
+                        <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=800&q=80" alt="Salon Treatment" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6 text-white p-4 rounded-2xl glass-card bg-black/30 border-white/20">
+                            <p class="font-cursive text-2xl font-bold">100% Client Satisfaction</p>
+                            <p class="text-xs opacity-90">Tailored Stitching & Professional Parlor Expertise</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-16 bg-white/50 dark:bg-slate-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80" alt="Beauty Studio" class="rounded-2xl shadow-lg w-full h-60 object-cover">
+                    <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=600&q=80" alt="Stitching Work" class="rounded-2xl shadow-lg w-full h-60 object-cover mt-8">
+                </div>
+                <div>
+                    <h2 class="text-xs uppercase tracking-widest text-brand-600 dark:text-brand-400 font-extrabold mb-2">Our Story</h2>
+                    <h3 class="text-3xl font-extrabold text-slate-900 dark:text-white">Crafting Beauty & Perfection Since 2015</h3>
+                    <p class="mt-4 text-slate-600 dark:text-slate-300 leading-relaxed">
+                        At <span class="font-bold text-brand-600">Shital Beauty Parlor & Stitching</span>, we merge professional salon pampering with bespoke boutique tailoring under one roof. Whether you need a glowing facial, bridal makeup, or perfect designer blouse fitting, our dedicated studio ensures precision and elegance in every detail.
+                    </p>
+                    <div class="mt-6 grid grid-cols-2 gap-4">
+                        <div class="p-4 rounded-2xl bg-brand-50 dark:bg-slate-800/60 border border-brand-100 dark:border-slate-800">
+                            <i class="fa-solid fa-wand-magic-sparkles text-2xl text-brand-600 mb-2"></i>
+                            <h4 class="font-bold text-base">Beauty Parlour</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">17 Specialized Skincare & Hair Treatments</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-brand-50 dark:bg-slate-800/60 border border-brand-100 dark:border-slate-800">
+                            <i class="fa-solid fa-scissors text-2xl text-brand-600 mb-2"></i>
+                            <h4 class="font-bold text-base">Custom Stitching</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">15 Master Tailoring & Fitting Services</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="beauty-services" class="py-16 bg-white dark:bg-slate-900/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <h2 class="text-xs uppercase tracking-widest text-brand-600 dark:text-brand-400 font-extrabold">Professional Pampering</h2>
+                <p class="text-3xl font-extrabold text-slate-900 dark:text-white mt-1">17 Beauty Parlour Services</p>
+                <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm">Comprehensive beauty procedures personalized for your glowing look.</p>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10" id="beautyFilterTabs">
+                <button onclick="filterBeauty('all')" class="beauty-tab-btn active px-4 py-2 rounded-full text-xs font-bold bg-brand-600 text-white shadow-md">All Services</button>
+                <button onclick="filterBeauty('skin')" class="beauty-tab-btn px-4 py-2 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-brand-50">Skin Care</button>
+                <button onclick="filterBeauty('hair')" class="beauty-tab-btn px-4 py-2 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-brand-50">Hair Care</button>
+                <button onclick="filterBeauty('bridal')" class="beauty-tab-btn px-4 py-2 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-brand-50">Bridal & Glam</button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="beautyServicesContainer">
+                <!-- 17 Beauty Cards Dynamic JS Insertion -->
+            </div>
+        </div>
+    </section>
+
+    <section id="stitching-services" class="py-16 bg-brand-50/20 dark:bg-slate-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <h2 class="text-xs uppercase tracking-widest text-brand-600 dark:text-brand-400 font-extrabold">Custom Boutique Tailoring</h2>
+                <p class="text-3xl font-extrabold text-slate-900 dark:text-white mt-1">15 Stitching & Tailoring Services</p>
+                <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm">Precision fitting, modern ethnic designs, and designer bridal outfits.</p>
+            </div>
+
+            <!-- Tailoring Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10" id="stitchingFilterTabs">
+                <button onclick="filterStitching('all')" class="stitching-tab-btn active px-4 py-2 rounded-full text-xs font-bold bg-brand-600 text-white shadow-md">All Tailoring</button>
+                <button onclick="filterStitching('ladies')" class="stitching-tab-btn px-4 py-2 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-brand-50">Ladies Outfits</button>
+                <button onclick="filterStitching('gents')" class="stitching-tab-btn px-4 py-2 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-brand-50">Gents Tailoring</button>
+                <button onclick="filterStitching('alteration')" class="stitching-tab-btn px-4 py-2 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-brand-50">Alterations & Fitting</button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6" id="stitchingServicesContainer">
+                <!-- 15 Stitching Cards Dynamic JS Insertion -->
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-16 bg-white dark:bg-slate-900/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs uppercase tracking-widest text-brand-600 dark:text-brand-400 font-extrabold">Our Creative Showcase</h2>
+                <p class="text-3xl font-extrabold text-slate-900 dark:text-white mt-1">6 Portfolio Samples & Designs</p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-6" id="portfolioGallery">
+                <!-- 6 Portfolio items rendered -->
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="py-20 bg-slate-100 dark:bg-slate-900/80 overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 text-center">
+            <h2 class="text-xs uppercase tracking-widest text-brand-600 dark:text-brand-400 font-extrabold">Client Feedback</h2>
+            <p class="text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Owl Style "Center with Loop" Reviews</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Middle active review is scaled center in an infinite seamless loop</p>
+        </div>
+
+        <!-- Owl Carousel Viewport -->
+        <div class="owl-viewport" id="owlViewport">
+            <div class="owl-stage" id="owlStage">
+                <!-- Dynamic Review Cards with Center Loop Logic -->
+            </div>
+        </div>
+
+        <!-- Slider Navigation Controls -->
+        <div class="flex justify-center items-center gap-4 mt-6">
+            <button id="owlPrevBtn" class="w-12 h-12 rounded-full bg-white dark:bg-slate-800 shadow-md text-slate-800 dark:text-white hover:bg-brand-600 hover:text-white transition-all flex items-center justify-center text-lg">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+
+            <!-- Indicator Dots -->
+            <div class="flex gap-2" id="owlDots"></div>
+
+            <button id="owlNextBtn" class="w-12 h-12 rounded-full bg-white dark:bg-slate-800 shadow-md text-slate-800 dark:text-white hover:bg-brand-600 hover:text-white transition-all flex items-center justify-center text-lg">
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <section id="booking" class="py-16 bg-white dark:bg-slate-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                <!-- Details Column -->
+                <div class="lg:col-span-5 glass-card p-8 rounded-3xl shadow-xl flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6">Contact & Studio Details</h3>
+                        <div class="space-y-6 text-sm">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-brand-100 dark:bg-brand-900/50 text-brand-600 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 dark:text-white">Studio Address</h4>
+                                    <p class="text-slate-500 dark:text-slate-400 mt-0.5">Shital Studio, Main Bazar Road, Vajdi / Rajkot, Gujarat 360005</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-brand-100 dark:bg-brand-900/50 text-brand-600 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 dark:text-white">Phone & WhatsApp</h4>
+                                    <p class="text-slate-500 dark:text-slate-400 mt-0.5">+91 98765 43210</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-brand-100 dark:bg-brand-900/50 text-brand-600 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 dark:text-white">Working Hours</h4>
+                                    <p class="text-slate-500 dark:text-slate-400 mt-0.5">Monday - Sunday: 9:00 AM - 8:30 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Direct Social Action Buttons -->
+                    <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800 grid grid-cols-3 gap-3 text-center">
+                        <a href="https://wa.me/919876543210" target="_blank" class="p-3 rounded-2xl bg-green-500/10 text-green-600 hover:bg-green-500 hover:text-white transition-all font-semibold text-xs flex flex-col items-center gap-1">
+                            <i class="fa-brands fa-whatsapp text-xl"></i> WhatsApp
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="p-3 rounded-2xl bg-pink-500/10 text-pink-600 hover:bg-pink-500 hover:text-white transition-all font-semibold text-xs flex flex-col items-center gap-1">
+                            <i class="fa-brands fa-instagram text-xl"></i> Instagram
+                        </a>
+                        <a href="https://facebook.com" target="_blank" class="p-3 rounded-2xl bg-blue-500/10 text-blue-600 hover:bg-blue-500 hover:text-white transition-all font-semibold text-xs flex flex-col items-center gap-1">
+                            <i class="fa-brands fa-facebook text-xl"></i> Facebook
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Form Column -->
+                <div class="lg:col-span-7 glass-card p-8 sm:p-10 rounded-3xl shadow-xl border border-brand-100 dark:border-slate-800">
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Book Appointment</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-xs mb-6">Redirects directly to WhatsApp chat with formatted pre-filled appointment message.</p>
+
+                    <form id="whatsappForm" class="space-y-5 text-sm">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block font-semibold mb-1.5">Your Name</label>
+                                <input type="text" id="custName" required placeholder="Name" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-transparent focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block font-semibold mb-1.5">Phone Number</label>
+                                <input type="tel" id="custPhone" required placeholder="Mobile Number" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-transparent focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block font-semibold mb-1.5">Select Service Category</label>
+                                <select id="bookingCategory" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                                    <option value="Beauty Parlour Service">Beauty Parlour Service</option>
+                                    <option value="Stitching & Tailoring">Stitching & Tailoring</option>
+                                    <option value="Both Combo Package">Both Combo Package</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block font-semibold mb-1.5">Preferred Date & Time</label>
+                                <input type="datetime-local" id="custDateTime" required class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-transparent focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block font-semibold mb-1.5">Specific Requirements / Notes</label>
+                            <textarea id="custNotes" rows="3" placeholder="E.g., Facial type, Blouse design preference..." class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-transparent focus:ring-2 focus:ring-brand-500 focus:outline-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-3 text-base">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i> Launch WhatsApp Appointment
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="md:col-span-2">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-full bg-brand-600 text-white flex items-center justify-center font-cursive text-xl font-bold">S</div>
+                    <span class="font-bold text-xl font-cursive text-white">Shital Studio</span>
+                </div>
+                <p class="text-sm max-w-sm">Premium beauty parlour and custom stitching studio offering top-grade salon treatments and personalized ethnic tailor designs.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Quick Links</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#about" class="hover:text-brand-400 transition-colors">About Us</a></li>
+                    <li><a href="#beauty-services" class="hover:text-brand-400 transition-colors">Beauty Parlour</a></li>
+                    <li><a href="#stitching-services" class="hover:text-brand-400 transition-colors">Stitching Services</a></li>
+                    <li><a href="#portfolio" class="hover:text-brand-400 transition-colors">Portfolio Gallery</a></li>
+                    <li><button onclick="openLegalModal('privacy')" class="hover:text-brand-400 transition-colors text-left">Privacy Policy</button></li>
+                    <li><button onclick="openLegalModal('terms')" class="hover:text-brand-400 transition-colors text-left">Terms & Conditions</button></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Follow Us</h4>
+                <div class="flex gap-4 text-lg">
+                    <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-brand-600 text-white transition-colors flex items-center justify-center"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://facebook.com" target="_blank" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-brand-600 text-white transition-colors flex items-center justify-center"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://wa.me/919876543210" target="_blank" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-brand-600 text-white transition-colors flex items-center justify-center"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 pt-6 border-t border-slate-800 text-xs text-center">
+            &copy; 2026 Shital Beauty Parlor & Stitching Studio. All rights reserved.
+        </div>
+    </footer>
+
+    <button id="openRightSettingsBtn" class="fixed right-0 top-1/2 -translate-y-1/2 z-50 bg-gradient-to-l from-brand-600 to-brand-500 text-white pl-4 pr-3 py-3 rounded-l-2xl shadow-2xl hover:pl-5 transition-all group border-l-2 border-y-2 border-white/30" title="Open Accessibility & Preference Panel" aria-label="Open Preference Panel">
+        <i class="fa-solid fa-gear text-2xl animate-spin-slow group-hover:rotate-180 transition-transform"></i>
+    </button>
+
+    <div id="settingsOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+    <div id="rightSettingsDrawer" class="fixed top-0 right-0 bottom-0 w-90 max-w-[90vw] bg-white dark:bg-slate-900 z-50 transform translate-x-full transition-transform duration-300 ease-in-out shadow-2xl flex flex-col justify-between overflow-y-auto">
+        <div class="p-6">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+                <h3 class="text-lg font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-brand-600"></i> Preferences & Settings
+                </h3>
+                <button id="closeRightSettingsBtn" class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <div class="py-6 space-y-6">
+                <!-- Dark / Light Mode Toggle -->
+                <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800">
+                    <span class="font-semibold text-sm">Dark / Light Mode</span>
+                    <button class="darkToggleBtnMain w-12 h-6 rounded-full bg-slate-300 dark:bg-brand-600 relative p-0.5 transition-colors">
+                        <div class="w-5 h-5 rounded-full bg-white shadow-md transform dark:translate-x-6 transition-transform"></div>
+                    </button>
+                </div>
+
+                <!-- 9 Theme Color Palettes -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Color Theme Options</label>
+                    <div class="grid grid-cols-3 gap-2.5" id="rightSettingsThemeGrid">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+
+                <!-- Primary Font Switcher -->
+                <div class="pt-4 border-t border-slate-100 dark:border-slate-800">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Primary Font</label>
+                    <select id="primaryFontSelect" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none">
+                        <option value="'Inter', sans-serif">Inter Clean</option>
+                        <option value="'Poppins', sans-serif">Poppins Modern</option>
+                        <option value="'Playfair Display', serif">Playfair Serif</option>
+                    </select>
+                </div>
+
+                <!-- Secondary Script Cursive Font Switcher -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Secondary Cursive Font</label>
+                    <select id="secondaryFontSelect" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none">
+                        <option value="'Dancing Script', cursive">Dancing Script</option>
+                        <option value="'Great Vibes', cursive">Great Vibes</option>
+                        <option value="'Pacifico', cursive">Pacifico</option>
+                    </select>
+                </div>
+
+                <!-- Font Size Adjustment Slider & Controls -->
+                <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
+                    <div class="flex justify-between items-center">
+                        <label class="text-xs font-bold uppercase tracking-wider text-slate-400">Font Size Adjust</label>
+                        <span id="fontSizeDisplay" class="text-xs font-bold text-brand-600">18px</span>
+                    </div>
+                    <input type="range" id="fontSizeSlider" min="14" max="26" value="18" class="w-full accent-brand-600 cursor-pointer">
+                    <div class="grid grid-cols-3 gap-2">
+                        <button id="fontDecBtn" class="py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-xs font-bold">A-</button>
+                        <button id="fontResetBtn" class="py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-xs font-bold">Reset</button>
+                        <button id="fontIncBtn" class="py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-xs font-bold">A+</button>
+                    </div>
+                </div>
+
+                <!-- Accessibility Toggles -->
+                <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">Accessibility Filters</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button id="contrastToggle" class="py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-circle-half-stroke"></i> Contrast
+                        </button>
+                        <button id="grayscaleToggle" class="py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-eye"></i> Grayscale
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-6 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-400 text-center">
+            Settings auto-saved
+        </div>
+    </div>
+
+    <!-- Scroll To Top Button -->
+    <button id="scrollTopBtn" class="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-2xl opacity-0 pointer-events-none transition-all duration-300 flex items-center justify-center hover:scale-110">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Portfolio Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4">
+        <button id="closeLightbox" class="absolute top-6 right-6 text-white text-3xl"><i class="fa-solid fa-xmark"></i></button>
+        <img id="lightboxImg" src="" alt="Enlarged View" class="max-w-full max-h-[85vh] rounded-2xl shadow-2xl object-contain">
+    </div>
+
+    <!-- Legal Policy Modal -->
+    <div id="legalModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 max-w-2xl w-full p-8 rounded-3xl shadow-2xl max-h-[80vh] overflow-y-auto relative">
+            <button onclick="closeLegalModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-800 dark:hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <h3 id="legalTitle" class="text-2xl font-bold text-slate-900 dark:text-white mb-4"></h3>
+            <div id="legalBody" class="text-slate-600 dark:text-slate-300 text-sm space-y-3 leading-relaxed"></div>
+        </div>
+    </div>
+
+    <script>
+        // SERVICE DATA ARRAYS
+        const beautyServicesData = [
+            { name: "Facial & Skin Care", price: "₹800+", cat: "skin", desc: "Deep herbal cleansing, fruit glow, and anti-tan skin hydration." },
+            { name: "Face Cleanup", price: "₹400+", cat: "skin", desc: "Quick pore unclogging, blackhead removal, and soothing pack." },
+            { name: "Face Massage", price: "₹350+", cat: "skin", desc: "Relieving pressure point aromatherapy face massage." },
+            { name: "Eyebrow Threading", price: "₹50+", cat: "skin", desc: "Precision eyebrow shaping and lip threading." },
+            { name: "Upper Lip Threading", price: "₹30+", cat: "skin", desc: "Gentle upper lip & chin facial hair removal." },
+            { name: "Waxing Services", price: "₹300+", cat: "skin", desc: "Full arms, legs, and body chocolate waxing." },
+            { name: "Threading Full Face", price: "₹150+", cat: "skin", desc: "Smooth full face hair threading treatment." },
+            { name: "Hair Cutting & Trimming", price: "₹250+", cat: "hair", desc: "Customized haircuts, layers, steps, and U/V cuts." },
+            { name: "Hair Styling & Blowdry", price: "₹300+", cat: "hair", desc: "Curl styling, crimping, ironing, and volume blow-dry." },
+            { name: "Hair Spa Treatment", price: "₹700+", cat: "hair", desc: "Intense moisture scalp repair and serum massage." },
+            { name: "Hair Coloring & Highlights", price: "₹900+", cat: "hair", desc: "Global hair coloring, streak highlights, and root touch-ups." },
+            { name: "Head Massage with Hot Oil", price: "₹300+", cat: "hair", desc: "Stress relief herbal oil scalp conditioning." },
+            { name: "Manicure Spa", price: "₹450+", cat: "bridal", desc: "Exfoliating hand scrub, nail cut, and gel polishing." },
+            { name: "Pedicure Spa", price: "₹550+", cat: "bridal", desc: "Dead skin removal, foot massage, and nail care." },
+            { name: "Bridal Makeup Package", price: "₹6000+", cat: "bridal", desc: "HD bridal makeup, hair styling, draping & accessories." },
+            { name: "Party Makeup", price: "₹2000+", cat: "bridal", desc: "Glamorous party look tailored for weddings & receptions." },
+            { name: "Bridal Beauty Package", price: "₹8000+", cat: "bridal", desc: "Full pre-bridal skin care, wax, facial, & wedding makeup." }
+        ];
+
+        const stitchingServicesData = [
+            { name: "Ladies Tailoring", price: "₹300+", cat: "ladies", desc: "Standard ladies suit and ethnic wear tailoring." },
+            { name: "Gents Tailoring", price: "₹500+", cat: "gents", desc: "Custom shirts, trousers, and kurta stitching." },
+            { name: "Blouse Stitching", price: "₹400+", cat: "ladies", desc: "Classic lined saree blouse tailoring with perfect fit." },
+            { name: "Blouse Design & Stitching", price: "₹700+", cat: "ladies", desc: "Padded, backless, high-neck, and modern cut blouses." },
+            { name: "Dress Stitching", price: "₹500+", cat: "ladies", desc: "Custom one-piece dresses, maxis, and frocks." },
+            { name: "Suit Stitching", price: "₹450+", cat: "gents", desc: "3-piece ethnic and formal gents suit tailoring." },
+            { name: "Kurti Stitching", price: "₹350+", cat: "ladies", desc: "Straight-cut, Anarkali, and umbrella kurti stitching." },
+            { name: "Salwar Suit Stitching", price: "₹400+", cat: "ladies", desc: "Patiala, Chudidar, and Palazzo suit tailoring." },
+            { name: "Lehenga Stitching", price: "₹1200+", cat: "ladies", desc: "Bridal lehenga choli tailoring with double lining." },
+            { name: "Saree Blouse Alteration", price: "₹100+", cat: "alteration", desc: "Quick resize and shoulder alteration for blouses." },
+            { name: "Dress Alteration", price: "₹120+", cat: "alteration", desc: "Fitting adjustment for readymade dresses." },
+            { name: "Clothing Alteration", price: "₹80+", cat: "alteration", desc: "General garment tightening, shortening, & repairs." },
+            { name: "Custom Stitching", price: "₹600+", cat: "ladies", desc: "Tailor-made designs based on customer photos." },
+            { name: "Measurement & Fitting", price: "Free", cat: "alteration", desc: "In-studio measurement session by master tailors." },
+            { name: "Master Tailor Services", price: "₹1000+", cat: "ladies", desc: "Exclusive high-end Maggam embroidery & designer wear." }
+        ];
+
+        const reviews = [
+            { name: "Priya Sharma", service: "Bridal Makeup & Lehenga", text: "Shital did my wedding HD makeup and stitched my bridal lehenga choli perfectly! Highly recommended!", rating: 5 },
+            { name: "Anjali Patel", service: "Blouse Design & Stitching", text: "The fitting of my padded blouse was 100% accurate on the very first try! Outstanding craft.", rating: 5 },
+            { name: "Sneha Reddy", service: "Hair Spa & Facial", text: "Very relaxing spa experience. The skin glow after facial was unbelievable.", rating: 5 },
+            { name: "Meera Verma", service: "Custom Suit Stitching", text: "Beautiful tailoring! She brought my Pinterest suit design to life with amazing detail.", rating: 5 },
+            { name: "Kavita Joshi", service: "Party Makeup & Hair Cut", text: "Prompt service and super friendly behavior. Loved my engagement glam look!", rating: 5 },
+            { name: "Rutuja Shah", service: "Gents & Ladies Tailoring", text: "Stitched outfits for my whole family for a wedding. Superior finishing and comfort.", rating: 5 }
+        ];
+
+        const themes = [
+            { id: "rose-gold", name: "Rose Gold", color: "#f06595" },
+            { id: "royal-emerald", name: "Royal Emerald", color: "#20c997" },
+            { id: "royal-gold", name: "Royal Gold", color: "#fcc419" },
+            { id: "amethyst-violet", name: "Amethyst Violet", color: "#cc5de8" },
+            { id: "sapphire-breeze", name: "Sapphire Breeze", color: "#4dabf7" },
+            { id: "ruby-crimson", name: "Ruby Crimson", color: "#ff6b6b" },
+            { id: "emerald-mint", name: "Emerald Mint", color: "#51cf66" },
+            { id: "sunset-bronze", name: "Sunset Bronze", color: "#ff922b" },
+            { id: "neon-cyber-pink", name: "Neon Cyber Pink", color: "#f783ac" }
+        ];
+
+        // INIT ON LOAD
+        document.addEventListener('DOMContentLoaded', () => {
+            renderBeautyServices('all');
+            renderStitchingServices('all');
+            renderPortfolio();
+            renderThemeSelectors();
+            initOwlCarouselLoop();
+            initLeftDrawer();
+            initRightSettingsDrawer();
+            initBookingForm();
+            initScrollTop();
+        });
+
+        // SERVICE RENDERERS WITH TAB FILTERS
+        function renderBeautyServices(filterCategory = 'all') {
+            const container = document.getElementById('beautyServicesContainer');
+            const items = filterCategory === 'all' ? beautyServicesData : beautyServicesData.filter(i => i.cat === filterCategory);
+            container.innerHTML = items.map((item, index) => `
+                <div class="glass-card p-6 rounded-2xl hover:border-brand-500/50 hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="w-8 h-8 rounded-full bg-brand-100 dark:bg-brand-900/50 text-brand-600 dark:text-brand-300 flex items-center justify-center font-bold text-xs">${index+1}</span>
+                            <span class="text-xs font-bold text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-slate-800 px-3 py-1 rounded-full">${item.price}</span>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-800 dark:text-white mb-1">${item.name}</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-xs">${item.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterBeauty(cat) {
+            document.querySelectorAll('.beauty-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-600', 'text-white', 'shadow-md');
+                btn.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+            });
+            event.target.classList.add('bg-brand-600', 'text-white', 'shadow-md');
+            renderBeautyServices(cat);
+        }
+
+        function renderStitchingServices(filterCategory = 'all') {
+            const container = document.getElementById('stitchingServicesContainer');
+            const items = filterCategory === 'all' ? stitchingServicesData : stitchingServicesData.filter(i => i.cat === filterCategory);
+            container.innerHTML = items.map((item, index) => `
+                <div class="glass-card p-6 rounded-2xl hover:border-brand-500/50 hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="w-8 h-8 rounded-full bg-brand-100 dark:bg-brand-900/50 text-brand-600 dark:text-brand-300 flex items-center justify-center font-bold text-xs">${index+1}</span>
+                            <span class="text-xs font-bold text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-slate-800 px-3 py-1 rounded-full">${item.price}</span>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-800 dark:text-white mb-1">${item.name}</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-xs">${item.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterStitching(cat) {
+            document.querySelectorAll('.stitching-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-600', 'text-white', 'shadow-md');
+                btn.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+            });
+            event.target.classList.add('bg-brand-600', 'text-white', 'shadow-md');
+            renderStitchingServices(cat);
+        }
+
+        function renderPortfolio() {
+            const samples = [
+                { img: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=600&q=80", title: "Bridal Makeup" },
+                { img: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80", title: "Hair Styling & Spa" },
+                { img: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=600&q=80", title: "Custom Blouse Stitching" },
+                { img: "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80", title: "Skin Care & Glow Facial" },
+                { img: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=600&q=80", title: "Party Glam Makeup" },
+                { img: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=80", title: "Designer Lehenga Fitting" }
+            ];
+            const gallery = document.getElementById('portfolioGallery');
+            gallery.innerHTML = samples.map(s => `
+                <div class="overflow-hidden rounded-2xl cursor-pointer group relative aspect-square shadow-md" onclick="openLightbox('${s.img}')">
+                    <img src="${s.img}" alt="${s.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-brand-900/50 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white p-3 text-center">
+                        <i class="fa-solid fa-magnifying-glass-plus text-2xl mb-1"></i>
+                        <span class="font-bold text-xs">${s.title}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderThemeSelectors() {
+            const rightGrid = document.getElementById('rightSettingsThemeGrid');
+            rightGrid.innerHTML = themes.map(t => `
+                <button onclick="setTheme('${t.id}')" class="flex flex-col items-center p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-brand-500 text-[11px] font-semibold transition-all">
+                    <span class="w-6 h-6 rounded-full mb-1 shadow-sm" style="background-color: ${t.color}"></span>
+                    <span class="truncate w-full text-center">${t.name}</span>
+                </button>
+            `).join('');
+
+            const drawerGrid = document.getElementById('drawerQuickThemes');
+            drawerGrid.innerHTML = themes.map(t => `
+                <button onclick="setTheme('${t.id}')" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 shadow-sm transition-transform hover:scale-110" style="background-color: ${t.color}" title="${t.name}"></button>
+            `).join('');
+        }
+
+        function setTheme(themeId) {
+            document.documentElement.setAttribute('data-theme', themeId);
+        }
+
+        // OWL CAROUSEL AUTHENTIC "CENTER WITH LOOP" ENGINE
+        let owlIndex = 0;
+        let owlTimer = null;
+
+        function initOwlCarouselLoop() {
+            const stage = document.getElementById('owlStage');
+            
+            // Triple the data array for infinite looping seamlessly
+            const loopData = [...reviews, ...reviews, ...reviews];
+            
+            stage.innerHTML = loopData.map((rev) => `
+                <div class="owl-item">
+                    <div class="glass-card p-6 rounded-3xl shadow-md border border-slate-200 dark:border-slate-800">
+                        <div class="flex text-amber-400 mb-3 text-sm">
+                            ${'<i class="fa-solid fa-star"></i>'.repeat(rev.rating)}
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm italic mb-4 leading-relaxed">"${rev.text}"</p>
+                        <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center">
+                            <div>
+                                <h4 class="font-bold text-slate-800 dark:text-white text-base">${rev.name}</h4>
+                                <span class="text-xs text-brand-600 dark:text-brand-400 font-semibold">${rev.service}</span>
+                            </div>
+                            <i class="fa-solid fa-quote-right text-2xl text-brand-500/20"></i>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Render indicator dots
+            const dots = document.getElementById('owlDots');
+            dots.innerHTML = reviews.map((_, idx) => `
+                <button onclick="goOwlIndex(${idx})" class="owl-dot-btn w-3 h-3 rounded-full bg-slate-300 dark:bg-slate-700 transition-all"></button>
+            `).join('');
+
+            // Set starting point in the middle loop array
+            owlIndex = reviews.length; 
+            updateOwlPosition(false);
+            startOwlAutoplay();
+
+            document.getElementById('owlNextBtn').addEventListener('click', () => { nextOwl(); resetOwlAutoplay(); });
+            document.getElementById('owlPrevBtn').addEventListener('click', () => { prevOwl(); resetOwlAutoplay(); });
+
+            // Touch Drag / Swipe
+            let startX = 0;
+            const viewport = document.getElementById('owlViewport');
+            viewport.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
+            viewport.addEventListener('touchend', (e) => {
+                let diff = startX - e.changedTouches[0].clientX;
+                if (diff > 40) { nextOwl(); resetOwlAutoplay(); }
+                else if (diff < -40) { prevOwl(); resetOwlAutoplay(); }
+            });
+        }
+
+        function updateOwlPosition(animate = true) {
+            const stage = document.getElementById('owlStage');
+            const items = document.querySelectorAll('.owl-item');
+            const dots = document.querySelectorAll('.owl-dot-btn');
+            const total = items.length;
+
+            if (!total) return;
+
+            items.forEach((item, i) => {
+                item.classList.remove('center');
+                if (i === owlIndex) {
+                    item.classList.add('center');
+                }
+            });
+
+            // Highlight corresponding indicator dot
+            const activeDotIndex = owlIndex % reviews.length;
+            dots.forEach((d, idx) => {
+                if (idx === activeDotIndex) {
+                    d.classList.add('bg-brand-600', 'w-8');
+                    d.classList.remove('bg-slate-300', 'dark:bg-slate-700');
+                } else {
+                    d.classList.remove('bg-brand-600', 'w-8');
+                    d.classList.add('bg-slate-300', 'dark:bg-slate-700');
+                }
+            });
+
+            // Calculate dead-center translate offset
+            const itemWidth = items[0].offsetWidth + (window.innerWidth >= 1024 ? 40 : (window.innerWidth >= 640 ? 32 : 24));
+            const containerWidth = document.getElementById('owlViewport').offsetWidth;
+            const centerOffset = (containerWidth / 2) - (itemWidth / 2);
+
+            stage.style.transition = animate ? 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
+            stage.style.transform = `translateX(${centerOffset - (owlIndex * itemWidth)}px)`;
+
+            // Seamless infinite loop boundary check
+            if (owlIndex >= reviews.length * 2) {
+                setTimeout(() => {
+                    owlIndex = reviews.length;
+                    updateOwlPosition(false);
+                }, 500);
+            } else if (owlIndex < reviews.length) {
+                setTimeout(() => {
+                    owlIndex = reviews.length * 2 - 1;
+                    updateOwlPosition(false);
+                }, 500);
+            }
+        }
+
+        function nextOwl() {
+            owlIndex++;
+            updateOwlPosition(true);
+        }
+
+        function prevOwl() {
+            owlIndex--;
+            updateOwlPosition(true);
+        }
+
+        function goOwlIndex(idx) {
+            owlIndex = reviews.length + idx;
+            updateOwlPosition(true);
+            resetOwlAutoplay();
+        }
+
+        function startOwlAutoplay() {
+            owlTimer = setInterval(nextOwl, 3500);
+        }
+
+        function resetOwlAutoplay() {
+            clearInterval(owlTimer);
+            startOwlAutoplay();
+        }
+
+        // LEFT MOBILE DRAWER & SECONDARY CONTROLS
+        function initLeftDrawer() {
+            const menuBtn = document.getElementById('mobileMenuBtn');
+            const closeBtn = document.getElementById('closeDrawerBtn');
+            const drawer = document.getElementById('mobileDrawer');
+            const overlay = document.getElementById('drawerOverlay');
+
+            function open() {
+                drawer.classList.remove('-translate-x-full');
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+            }
+            function close() {
+                drawer.classList.add('-translate-x-full');
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+            }
+
+            menuBtn.addEventListener('click', open);
+            closeBtn.addEventListener('click', close);
+            overlay.addEventListener('click', close);
+            document.querySelectorAll('.drawer-link').forEach(l => l.addEventListener('click', close));
+
+            // Toggle Dark Mode from inside Left Drawer
+            document.querySelectorAll('.darkToggleBtnSecondary').forEach(b => {
+                b.addEventListener('click', () => document.documentElement.classList.toggle('dark'));
+            });
+        }
+
+        // RIGHT-SIDE SLIDE-OVER SETTINGS DRAWER
+        function initRightSettingsDrawer() {
+            const openBtn = document.getElementById('openRightSettingsBtn');
+            const closeBtn = document.getElementById('closeRightSettingsBtn');
+            const drawer = document.getElementById('rightSettingsDrawer');
+            const overlay = document.getElementById('settingsOverlay');
+
+            function open() {
+                drawer.classList.remove('translate-x-full');
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+            }
+            function close() {
+                drawer.classList.add('translate-x-full');
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+            }
+
+            openBtn.addEventListener('click', open);
+            closeBtn.addEventListener('click', close);
+            overlay.addEventListener('click', close);
+
+            // Dark Toggle Main
+            document.querySelectorAll('.darkToggleBtnMain').forEach(b => {
+                b.addEventListener('click', () => document.documentElement.classList.toggle('dark'));
+            });
+
+            // Dynamic Font Selector
+            document.getElementById('primaryFontSelect').addEventListener('change', (e) => {
+                document.documentElement.style.setProperty('--font-primary', e.target.value);
+            });
+            document.getElementById('secondaryFontSelect').addEventListener('change', (e) => {
+                document.documentElement.style.setProperty('--font-secondary', e.target.value);
+            });
+
+            // Font Size Slider
+            const slider = document.getElementById('fontSizeSlider');
+            const display = document.getElementById('fontSizeDisplay');
+
+            function updateFontSize(val) {
+                slider.value = val;
+                display.innerText = val + 'px';
+                document.documentElement.style.setProperty('--font-base-size', val + 'px');
+            }
+
+            slider.addEventListener('input', (e) => updateFontSize(e.target.value));
+            document.getElementById('fontDecBtn').addEventListener('click', () => updateFontSize(Math.max(14, parseInt(slider.value) - 1)));
+            document.getElementById('fontIncBtn').addEventListener('click', () => updateFontSize(Math.min(26, parseInt(slider.value) + 1)));
+            document.getElementById('fontResetBtn').addEventListener('click', () => updateFontSize(18));
+
+            // Accessibility Filters
+            document.getElementById('contrastToggle').addEventListener('click', () => document.body.classList.toggle('high-contrast'));
+            document.getElementById('grayscaleToggle').addEventListener('click', () => document.body.classList.toggle('grayscale-filter'));
+        }
+
+        // SCROLL TO TOP BUTTON
+        function initScrollTop() {
+            const btn = document.getElementById('scrollTopBtn');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    btn.classList.remove('opacity-0', 'pointer-events-none');
+                } else {
+                    btn.classList.add('opacity-0', 'pointer-events-none');
+                }
+            });
+            btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        }
+
+        // WHATSAPP DIRECT FORM REDIRECT
+        function initBookingForm() {
+            document.getElementById('whatsappForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('custName').value;
+                const phone = document.getElementById('custPhone').value;
+                const cat = document.getElementById('bookingCategory').value;
+                const datetime = document.getElementById('custDateTime').value;
+                const notes = document.getElementById('custNotes').value;
+
+                const message = `Hello Shital Beauty Parlor & Stitching Studio!%0A%0AI would like to book an appointment:%0A• *Name:* ${encodeURIComponent(name)}%0A• *Phone:* ${encodeURIComponent(phone)}%0A• *Category:* ${encodeURIComponent(cat)}%0A• *Preferred Time:* ${encodeURIComponent(datetime)}%0A• *Notes:* ${encodeURIComponent(notes)}`;
+                
+                window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+            });
+        }
+
+        // LIGHTBOX MODAL
+        function openLightbox(url) {
+            const box = document.getElementById('lightbox');
+            document.getElementById('lightboxImg').src = url;
+            box.classList.remove('hidden');
+            box.classList.add('flex');
+        }
+        document.getElementById('closeLightbox').addEventListener('click', () => {
+            const box = document.getElementById('lightbox');
+            box.classList.add('hidden');
+            box.classList.remove('flex');
+        });
+
+        // LEGAL MODALS
+        function openLegalModal(type) {
+            const modal = document.getElementById('legalModal');
+            const title = document.getElementById('legalTitle');
+            const body = document.getElementById('legalBody');
+
+            if (type === 'privacy') {
+                title.innerText = 'Privacy Policy';
+                body.innerHTML = `
+                    <p>At Shital Beauty Parlor & Stitching, your privacy is paramount to us.</p>
+                    <p>We only collect personal information such as your name, phone number, and appointment preferences submitted voluntarily through our WhatsApp booking form.</p>
+                    <p>Your details are never shared or sold to third parties and are strictly used to coordinate salon and tailoring appointments.</p>
+                `;
+            } else {
+                title.innerText = 'Terms & Conditions';
+                body.innerHTML = `
+                    <p>By scheduling an appointment at Shital Beauty Parlor & Stitching Studio, you agree to the following terms:</p>
+                    <p>1. Custom tailoring fittings require initial measurement verification in studio.</p>
+                    <p>2. Advance deposits for bridal packages are non-refundable once product procurement or scheduling is finalized.</p>
+                    <p>3. WhatsApp appointments are confirmed upon direct reply from our studio management.</p>
+                `;
+            }
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeLegalModal() {
+            const modal = document.getElementById('legalModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    </script>
+</body>
+</html>
