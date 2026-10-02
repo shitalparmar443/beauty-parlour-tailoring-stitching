@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shital Beauty Parlour & Tailor - Premium Elegance</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: 'var(--color-brand-50)',
+                            100: 'var(--color-brand-100)',
+                            500: 'var(--color-brand-500)',
+                            600: 'var(--color-brand-600)',
+                            700: 'var(--color-brand-700)',
+                            800: 'var(--color-brand-800)',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            /* Default Palette: Rose Gold */
+            --color-brand-50: #fdf2f8;
+            --color-brand-100: #fce7f3;
+            --color-brand-500: #ec4899;
+            --color-brand-600: #db2777;
+            --color-brand-700: #be185d;
+            --color-brand-800: #9d174d;
+            --base-font-size: 18px;
+            --font-family-current: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family-current);
+            font-size: var(--base-font-size);
+            transition: font-size 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Glassmorphism Effect */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .dark .glass-panel {
+            background: rgba(17, 24, 39, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-brand-500);
+            border-radius: 4px;
+        }
+
+        /* Gear Spin */
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 8s linear infinite;
+        }
+
+        /* Pulse Button Effect */
+        @keyframes custom-pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.08); opacity: 0.9; }
+        }
+        .pulse-btn {
+            animation: custom-pulse 2.5s infinite;
+        }
+
+        /* Testimonial Active Slide Styles */
+        .testimonial-card {
+            transition: transform 0.5s ease, opacity 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+        }
+        .testimonial-card.is-active {
+            transform: scale(1.05);
+            opacity: 1;
+            z-index: 10;
+        }
+        .testimonial-card.is-side {
+            transform: scale(0.92);
+            opacity: 0.55;
+            filter: blur(0.5px);
+        }
+    </style>
+</head>
+
+<body class="bg-rose-50/30 dark:bg-gray-950 text-gray-800 dark:text-gray-100 min-h-screen flex flex-col transition-colors duration-300">
+
+    <!-- Customization Drawer Trigger Button -->
+    <button id="settings-toggle" onclick="toggleSettingsDrawer()" class="fixed right-0 top-1/2 -translate-y-1/2 z-50 bg-brand-600 text-white p-3 rounded-l-2xl shadow-2xl hover:bg-brand-700 transition-all group flex items-center gap-2 pl-4" aria-label="Open Customization Settings">
+        <i class="fa-solid fa-gear text-2xl animate-spin-slow group-hover:rotate-180 transition-transform duration-700"></i>
+        <span class="text-xs font-semibold uppercase tracking-wider hidden md:inline pr-1">Customize</span>
+    </button>
+
+    <!-- Drawer Overlay & Side Panel -->
+    <div id="settings-overlay" onclick="toggleSettingsDrawer()" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden transition-opacity duration-300 opacity-0"></div>
+    
+    <aside id="settings-drawer" class="fixed right-0 top-0 h-full w-80 max-w-[90vw] bg-white dark:bg-gray-900 z-[51] shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out p-6 overflow-y-auto flex flex-col justify-between">
+        <div>
+            <!-- Drawer Header -->
+            <div class="flex items-center justify-between pb-4 border-b border-gray-200 dark:border-gray-800">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-brand-600 text-xl"></i>
+                    <h3 class="font-bold text-lg text-gray-900 dark:text-white">Appearance & Theme</h3>
+                </div>
+                <button onclick="toggleSettingsDrawer()" class="text-gray-400 hover:text-gray-700 dark:hover:text-white p-1 rounded-lg">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <div class="space-y-6 mt-6">
+                <!-- Theme Toggle -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">Display Mode</label>
+                    <div class="grid grid-cols-2 gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-xl">
+                        <button id="theme-light-btn" onclick="setTheme('light')" class="flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-medium transition-all">
+                            <i class="fa-solid fa-sun text-amber-500"></i> Light
+                        </button>
+                        <button id="theme-dark-btn" onclick="setTheme('dark')" class="flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-medium transition-all">
+                            <i class="fa-solid fa-moon text-indigo-400"></i> Dark
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Font Select -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">Typography Font</label>
+                    <select id="font-select" onchange="changeFontFamily(this.value)" class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
+                        <option value="'Inter', sans-serif">Inter (Default)</option>
+                        <option value="'Playfair Display', serif">Playfair Display (Serif)</option>
+                        <option value="'Montserrat', sans-serif">Montserrat (Modern)</option>
+                        <option value="'Poppins', sans-serif">Poppins (Clean)</option>
+                        <option value="'Roboto', sans-serif">Roboto (Classic)</option>
+                        <option value="'Cormorant Garamond', serif">Cormorant Garamond (Elegant)</option>
+                    </select>
+                </div>
+
+                <!-- Font Size Slider -->
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Font Size</label>
+                        <span id="font-size-val" class="text-xs font-semibold text-brand-600 dark:text-brand-400">18px</span>
+                    </div>
+                    <input type="range" id="font-size-slider" min="14" max="24" value="18" step="1" oninput="changeFontSize(this.value)" class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-brand-600">
+                    <div class="flex justify-between text-[10px] text-gray-400 mt-1">
+                        <span>14px</span>
+                        <span>18px</span>
+                        <span>24px</span>
+                    </div>
+                </div>
+
+                <!-- Color Palette Switcher -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">Color Accent Palette</label>
+                    <div class="grid grid-cols-1 gap-2">
+                        <button onclick="setPalette('rose')" class="flex items-center gap-3 p-2.5 rounded-xl border border-gray-200 dark:border-gray-800 hover:bg-rose-50 dark:hover:bg-gray-800/50 transition-all text-left">
+                            <span class="w-6 h-6 rounded-full bg-pink-500 inline-block shadow"></span>
+                            <span class="text-sm font-medium">Rose Gold (Signature)</span>
+                        </button>
+                        <button onclick="setPalette('emerald')" class="flex items-center gap-3 p-2.5 rounded-xl border border-gray-200 dark:border-gray-800 hover:bg-emerald-50 dark:hover:bg-gray-800/50 transition-all text-left">
+                            <span class="w-6 h-6 rounded-full bg-emerald-600 inline-block shadow"></span>
+                            <span class="text-sm font-medium">Luxury Emerald</span>
+                        </button>
+                        <button onclick="setPalette('gold')" class="flex items-center gap-3 p-2.5 rounded-xl border border-gray-200 dark:border-gray-800 hover:bg-amber-50 dark:hover:bg-gray-800/50 transition-all text-left">
+                            <span class="w-6 h-6 rounded-full bg-amber-500 inline-block shadow"></span>
+                            <span class="text-sm font-medium">Royal Gold</span>
+                        </button>
+                        <button onclick="setPalette('purple')" class="flex items-center gap-3 p-2.5 rounded-xl border border-gray-200 dark:border-gray-800 hover:bg-purple-50 dark:hover:bg-gray-800/50 transition-all text-left">
+                            <span class="w-6 h-6 rounded-full bg-purple-600 inline-block shadow"></span>
+                            <span class="text-sm font-medium">Amethyst Purple</span>
+                        </button>
+                        <button onclick="setPalette('ruby')" class="flex items-center gap-3 p-2.5 rounded-xl border border-gray-200 dark:border-gray-800 hover:bg-red-50 dark:hover:bg-gray-800/50 transition-all text-left">
+                            <span class="w-6 h-6 rounded-full bg-rose-700 inline-block shadow"></span>
+                            <span class="text-sm font-medium">Ruby Velvet</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-6 border-t border-gray-200 dark:border-gray-800 text-center">
+            <button onclick="resetCustomizations()" class="text-xs text-gray-500 underline hover:text-brand-600">Reset to Defaults</button>
+        </div>
+    </aside>
+
+    <header class="sticky top-0 z-40 bg-white/85 dark:bg-gray-900/85 backdrop-blur-md border-b border-rose-100 dark:border-gray-800 shadow-sm transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Title -->
+                <a href="https://shitalparmar443.github.io/beauty-parlour-tailoring-stitching/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-amber-400 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform">
+                        S
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-brand-700 via-brand-600 to-amber-600 dark:from-brand-400 dark:to-amber-300 bg-clip-text text-transparent block">
+                            Shital Beauty Parlour & Tailor
+                        </span>
+                        <span class="text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wider uppercase block">
+                            Elegance • Beauty • Custom Stitching
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold">
+                    <a href="#beauty-services" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Beauty Parlour</a>
+                    <a href="#tailor-services" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Tailoring & Stitching</a>
+                    <a href="#covered-areas" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Home Services</a>
+                    <a href="#testimonials" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Reviews</a>
+                    <a href="#social-connect" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Social Links</a>
+                    <a href="#location" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Location</a>
+                </nav>
+
+                <!-- WhatsApp Direct Header CTA -->
+                <div class="flex items-center gap-3">
+                    <a href="https://wa.me/918200276755?text=Hello%20Shital%20Beauty%20Parlour%20%26%20Tailor%2C%20I%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-emerald-500 to-green-600 text-white px-4 py-2.5 rounded-full text-xs sm:text-sm font-semibold shadow-md hover:shadow-lg hover:brightness-110 transition-all flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span class="hidden sm:inline">WhatsApp Direct</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section class="relative py-16 md:py-20 overflow-hidden bg-gradient-to-b from-rose-100/50 via-pink-50/20 to-transparent dark:from-gray-900 dark:via-gray-900 dark:to-transparent">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center max-w-3xl mx-auto space-y-6">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-100 dark:bg-brand-900/40 text-brand-700 dark:text-brand-300 text-xs font-bold uppercase tracking-widest border border-brand-200 dark:border-brand-800">
+                        <i class="fa-solid fa-sparkles"></i> Premium Beauty & Master Tailoring
+                    </div>
+                    <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight">
+                        Enhance Your Grace & <span class="bg-gradient-to-r from-brand-600 to-amber-500 bg-clip-text text-transparent">Designer Stitching</span>
+                    </h1>
+                    <p class="text-gray-600 dark:text-gray-300 text-base md:text-lg">
+                        Bespoke bridal makeup, revitalizing skin treatments, and precision designer blouse, dress, and suit tailoring in Vajdi, Metoda & Rajkot.
+                    </p>
+                    <div class="pt-2 flex flex-wrap justify-center gap-4">
+                        <a href="#beauty-services" class="bg-brand-600 hover:bg-brand-700 text-white px-6 py-3 rounded-full text-sm font-bold shadow-lg hover:shadow-xl transition-all">
+                            Explore Beauty Parlour
+                        </a>
+                        <a href="#tailor-services" class="bg-white dark:bg-gray-800 text-gray-800 dark:text-white border border-gray-200 dark:border-gray-700 px-6 py-3 rounded-full text-sm font-bold shadow hover:bg-gray-50 dark:hover:bg-gray-700 transition-all">
+                            View Stitching Services
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="beauty-services" class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-gray-200 dark:border-gray-800 gap-4">
+                <div>
+                    <div class="flex items-center gap-2 text-brand-600 font-bold text-sm tracking-wider uppercase mb-1">
+                        <span>💇 Section A</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white">Our Premium Services Shital Beauty Parlour</h2>
+                </div>
+                <span class="text-xs text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 px-3 py-1.5 rounded-lg border border-gray-200 dark:border-gray-700 self-start md:self-auto">
+                    Click any service for direct WhatsApp inquiry
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="beauty-list">
+                <!-- Populated via JS -->
+            </div>
+        </section>
+
+        <section id="tailor-services" class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-gray-200 dark:border-gray-800 gap-4">
+                <div>
+                    <div class="flex items-center gap-2 text-brand-600 font-bold text-sm tracking-wider uppercase mb-1">
+                        <span>🧵 Section B</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white">Our Premium Services Shital Tailor & Stitching</h2>
+                </div>
+                <span class="text-xs text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 px-3 py-1.5 rounded-lg border border-gray-200 dark:border-gray-700 self-start md:self-auto">
+                    Bespoke stitching & custom fitting
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="tailor-list">
+                <!-- Populated via JS -->
+            </div>
+        </section>
+
+        <section id="covered-areas" class="py-12 bg-gradient-to-r from-brand-700 via-brand-600 to-amber-600 text-white my-12 shadow-xl">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+                <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-white border border-white/30">
+                    <i class="fa-solid fa-truck-ramp-box"></i> Home Services Available
+                </div>
+                <h2 class="text-3xl md:text-4xl font-extrabold">We Cover Your Neighborhood</h2>
+                <p class="max-w-2xl mx-auto text-rose-100 text-sm md:text-base">
+                    Enjoy parlour care and tailor measurements at your doorstep across these local areas:
+                </p>
+
+                <!-- Location Badges -->
+                <div class="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto pt-2">
+                    <span class="bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-2xl text-sm font-semibold flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot text-amber-300"></i> Vajdi Vad
+                    </span>
+                    <span class="bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-2xl text-sm font-semibold flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot text-amber-300"></i> Metoda
+                    </span>
+                    <span class="bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-2xl text-sm font-semibold flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot text-amber-300"></i> Rajkot
+                    </span>
+                    <span class="bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-2xl text-sm font-semibold flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot text-amber-300"></i> Haripal Pal
+                    </span>
+                    <span class="bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-2xl text-sm font-semibold flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot text-amber-300"></i> Kankot
+                    </span>
+                    <span class="bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-2xl text-sm font-semibold flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot text-amber-300"></i> Avadh Dhal
+                    </span>
+                    <span class="bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-2xl text-sm font-semibold flex items-center gap-2">
+                        <i class="fa-solid fa-house-chimney-medical text-amber-300"></i> & Nearby Localities
+                    </span>
+                </div>
+
+                <div class="pt-4">
+                    <a href="https://wa.me/918200276755?text=Hello%20Shital%20Beauty%20Parlour%20%26%20Tailor%2C%20I%20would%20like%20to%20book%20a%20Home%20Service%20at%20my%20location." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-white text-brand-700 px-6 py-3.5 rounded-full font-bold shadow-2xl hover:bg-rose-50 transition-all transform hover:-translate-y-1">
+                        <i class="fa-brands fa-whatsapp text-2xl text-emerald-600"></i>
+                        Request Home Visit via WhatsApp
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">Customer Testimonials</span>
+                <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white mt-1">What Customers Say</h2>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Active card centered & highlighted • Auto-sliding every 3.5s</p>
+            </div>
+
+            <div class="relative px-2 md:px-12" id="carousel-wrapper">
+                <!-- Continuous Carousel Container -->
+                <div class="overflow-hidden py-6">
+                    <div id="carousel-track" class="flex transition-transform duration-700 ease-in-out">
+                        <!-- Populated dynamically via JS to allow smooth infinite loop with 3 active card layout -->
+                    </div>
+                </div>
+
+                <!-- Carousel Arrows -->
+                <button onclick="moveCarousel(-1)" class="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white dark:bg-gray-800 shadow-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-800 dark:text-white hover:bg-brand-600 hover:text-white transition-all focus:outline-none">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button onclick="moveCarousel(1)" class="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white dark:bg-gray-800 shadow-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-800 dark:text-white hover:bg-brand-600 hover:text-white transition-all focus:outline-none">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <!-- Dots -->
+                <div class="flex justify-center gap-2 mt-4" id="carousel-dots">
+                    <!-- Dots generated dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <section id="social-connect" class="py-16 bg-rose-50/60 dark:bg-gray-900/50 border-t border-b border-gray-200 dark:border-gray-800 transition-colors">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 dark:bg-brand-900/50 text-brand-700 dark:text-brand-300 text-xs font-bold uppercase tracking-widest mb-3">
+                    <i class="fa-solid fa-globe"></i> Stay Connected
+                </div>
+                <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white mb-2">Follow Our Social Media & Get In Touch</h2>
+                <p class="text-gray-600 dark:text-gray-300 text-sm max-w-xl mx-auto mb-10">
+                    Connect with us on your favorite platforms for latest blouse designs, bridal makeovers, and direct messaging.
+                </p>
+
+                <!-- Social Cards Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 max-w-5xl mx-auto">
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/918200276755?text=Hello%20Shital%20Beauty%20Parlour%20%26%20Tailor" target="_blank" rel="noopener noreferrer" class="bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-md hover:shadow-xl hover:border-emerald-500 transition-all group flex flex-col items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <span class="text-sm font-bold text-gray-800 dark:text-white group-hover:text-emerald-600">WhatsApp</span>
+                        <span class="text-[11px] text-gray-400 dark:text-gray-500">+91 82002 76755</span>
+                    </a>
+
+                    <!-- Google Maps -->
+                    <a href="https://maps.app.goo.gl/2WEoMALsYVFgjPdx8" target="_blank" rel="noopener noreferrer" class="bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-md hover:shadow-xl hover:border-blue-500 transition-all group flex flex-col items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-100 dark:bg-blue-950/60 text-blue-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                        </div>
+                        <span class="text-sm font-bold text-gray-800 dark:text-white group-hover:text-blue-600">Google Map</span>
+                        <span class="text-[11px] text-gray-400 dark:text-gray-500">Business Profile</span>
+                    </a>
+
+                    <!-- Instagram -->
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-md hover:shadow-xl hover:border-pink-500 transition-all group flex flex-col items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-pink-100 dark:bg-pink-950/60 text-pink-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                        <span class="text-sm font-bold text-gray-800 dark:text-white group-hover:text-pink-600">Instagram</span>
+                        <span class="text-[11px] text-gray-400 dark:text-gray-500">@shital_beauty</span>
+                    </a>
+
+                    <!-- Facebook -->
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-md hover:shadow-xl hover:border-blue-700 transition-all group flex flex-col items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-100 dark:bg-blue-900/40 text-blue-700 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-facebook"></i>
+                        </div>
+                        <span class="text-sm font-bold text-gray-800 dark:text-white group-hover:text-blue-700">Facebook</span>
+                        <span class="text-[11px] text-gray-400 dark:text-gray-500">Official Page</span>
+                    </a>
+
+                    <!-- YouTube -->
+                    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-md hover:shadow-xl hover:border-red-600 transition-all group flex flex-col items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-red-100 dark:bg-red-950/60 text-red-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-youtube"></i>
+                        </div>
+                        <span class="text-sm font-bold text-gray-800 dark:text-white group-hover:text-red-600">YouTube</span>
+                        <span class="text-[11px] text-gray-400 dark:text-gray-500">Styling Videos</span>
+                    </a>
+
+                    <!-- GitHub Page -->
+                    <a href="https://shitalparmar443.github.io/beauty-parlour-tailoring-stitching/" target="_blank" rel="noopener noreferrer" class="bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-md hover:shadow-xl hover:border-gray-900 transition-all group flex flex-col items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-github"></i>
+                        </div>
+                        <span class="text-sm font-bold text-gray-800 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white">Website</span>
+                        <span class="text-[11px] text-gray-400 dark:text-gray-500">Official Web</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="location" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <!-- Address Details Card -->
+                <div class="space-y-6">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">Visit Us</span>
+                        <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white mt-1">Store Address & Timings</h2>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-md space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-brand-100 dark:bg-brand-900/50 text-brand-600 dark:text-brand-300 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 dark:text-white text-base">Shop Address</h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">
+                                    SAHAJANAND SMRUTI PARK, Near ORBIT, Metoda gate no 1, Vajdi, Gujarat 360021
+                                </p>
+                                <a href="https://maps.app.goo.gl/2WEoMALsYVFgjPdx8" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-bold text-brand-600 dark:text-brand-400 hover:underline mt-2">
+                                    Open in Google Maps <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-gray-100 dark:border-gray-700 pt-4 flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-300 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-regular fa-clock"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 dark:text-white text-base">Working Hours</h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">
+                                    <strong class="text-gray-900 dark:text-white">Monday – Sunday:</strong> 9:00 AM – 11:00 PM
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Phone Number configured to ALWAYS open WhatsApp -->
+                        <div class="border-t border-gray-100 dark:border-gray-700 pt-4 flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-300 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 dark:text-white text-base">Phone & WhatsApp Direct</h3>
+                                <a href="https://wa.me/918200276755?text=Hello%20Shital%20Beauty%20Parlour%20%26%20Tailor%2C%20I%20got%20your%20number%20from%20the%20website." target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-300 text-sm mt-1 inline-flex items-center gap-2 hover:text-emerald-600 font-semibold">
+                                    +91 82002 76755 <i class="fa-brands fa-whatsapp text-emerald-500"></i>
+                                </a>
+                                <p class="text-[11px] text-gray-400">Clicking phone opens WhatsApp chat directly</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google Maps Embed -->
+                <div class="rounded-3xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-700 h-[380px] w-full">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230.79615846618674!2d70.68925666061767!3d22.249997105890134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3959cdbccadacfbb%3A0x7952a28a1aec101e!2zU2hpdGFsIFRhaWxvcijgqrbgq4DgqqTgqrIg4Kqf4KuH4KqH4Kqy4KqwKQ!5e0!3m2!1sen!2sin!4v1790928155888!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-8 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:flex sm:items-center sm:justify-between">
+            <div class="mb-4 sm:mb-0 text-left">
+                <h3 class="text-base font-bold text-gray-900 dark:text-white">Shital Beauty Parlour & Tailor</h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400">SAHAJANAND SMRUTI PARK, Near ORBIT, Metoda gate no 1, Vajdi, Gujarat 360021</p>
+            </div>
+            <div class="text-xs text-gray-500 dark:text-gray-400">
+                © <span id="year-copy"></span> Shital Beauty Parlour & Tailor. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Bottom WhatsApp Action Button -->
+    <a href="https://wa.me/918200276755?text=Hello%20Shital%20Beauty%20Parlour%20%26%20Tailor%2C%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-40 bg-emerald-500 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-2xl hover:bg-emerald-600 transition-all pulse-btn" aria-label="WhatsApp Contact">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Scroll To Top Button -->
+    <button id="scroll-top-btn" onclick="scrollToTop()" class="fixed bottom-6 left-6 z-40 bg-white dark:bg-gray-800 text-gray-800 dark:text-white border border-gray-200 dark:border-gray-700 w-12 h-12 rounded-full shadow-lg flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hover:bg-brand-500 hover:text-white">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Data Definitions
+        const beautyServices = [
+            { name: "Facial & Skin Care", price: 499, icon: "fa-spa" },
+            { name: "Face Cleanup", price: 299, icon: "fa-wand-magic-sparkles" },
+            { name: "Face Massage", price: 249, icon: "fa-hand-sparkles" },
+            { name: "Eyebrow", price: 40, icon: "fa-eye" },
+            { name: "Upper Lip", price: 30, icon: "fa-smile" },
+            { name: "Waxing", price: 299, icon: "fa-bottle-droplet" },
+            { name: "Threading", price: 50, icon: "fa-scissors" },
+            { name: "Hair Cutting", price: 199, icon: "fa-scissors" },
+            { name: "Hair Styling", price: 349, icon: "fa-comb" },
+            { name: "Hair Spa", price: 599, icon: "fa-shower" },
+            { name: "Hair Coloring", price: 699, icon: "fa-palette" },
+            { name: "Head Massage", price: 199, icon: "fa-hands" },
+            { name: "Manicure", price: 349, icon: "fa-hand" },
+            { name: "Pedicure", price: 399, icon: "fa-shoe-prints" },
+            { name: "Bridal Makeup", price: 4999, icon: "fa-gem" },
+            { name: "Party Makeup", price: 1499, icon: "fa-star" },
+            { name: "Bridal Beauty Packages", price: 7999, icon: "fa-crown" }
+        ];
+
+        const tailorServices = [
+            { name: "Ladies Tailoring", price: 299, icon: "fa-shirt" },
+            { name: "Gents Tailoring", price: 349, icon: "fa-user-tie" },
+            { name: "Blouse Stitching", price: 249, icon: "fa-scissors" },
+            { name: "Blouse Design & Stitching", price: 499, icon: "fa-compass-drafting" },
+            { name: "Dress Stitching", price: 399, icon: "fa-vest" },
+            { name: "Suit Stitching", price: 499, icon: "fa-user-nurse" },
+            { name: "Kurti Stitching", price: 299, icon: "fa-vest-patches" },
+            { name: "Salwar Suit Stitching", price: 449, icon: "fa-person-dress" },
+            { name: "Lehenga Stitching", price: 799, icon: "fa-wand-magic" },
+            { name: "Saree Blouse Alteration", price: 99, icon: "fa-rotate" },
+            { name: "Dress Alteration", price: 129, icon: "fa-ruler" },
+            { name: "Clothing Alteration", price: 79, icon: "fa-pencil" },
+            { name: "Custom Stitching", price: 599, icon: "fa-pen-ruler" },
+            { name: "Measurement & Fitting", price: 99, icon: "fa-ruler-combined" },
+            { name: "Master Tailor Services", price: 699, icon: "fa-award" }
+        ];
+
+        const reviewsData = [
+            {
+                name: "Pooja Patel",
+                location: "Vajdi Vad, Gujarat",
+                text: "Shital Tailor did an absolute amazing job with my designer blouse stitching. The fitting around Metoda was perfect, and the bridal makeup service for my sister was praised by everyone!"
+            },
+            {
+                name: "Anjali Rathod",
+                location: "Haripal Pal, Rajkot",
+                text: "Extremely convenient home service available right at Haripal Pal! The hair spa and facial treatment were incredibly relaxing and reasonably priced."
+            },
+            {
+                name: "Hetashvi Parmar",
+                location: "Metoda Gate No 1",
+                text: "Master tailor skills are brilliant! They finished my dress stitching and lehenga alteration on very short notice before the event. Highly recommended."
+            },
+            {
+                name: "Kajal Solanki",
+                location: "Kankot, Gujarat",
+                text: "The facial glow lasted for days! Very clean, hygienic beauty parlour services with gentle care. Always my go-to choice in Vajdi."
+            },
+            {
+                name: "Bhavna Ben",
+                location: "Avadh Dhal",
+                text: "Very reliable tailoring service! Perfect saree blouse alteration and custom kurti stitching with exact measurements every time."
+            }
+        ];
+
+        // WhatsApp Direct Link Generator
+        function generateWhatsAppUrl(serviceName, price) {
+            const message = `Hello Shital Beauty Parlour & Tailor, I would like to book or inquire about *${serviceName}* (Price: ₹${price}). Please share details!`;
+            return `https://wa.me/918200276755?text=${encodeURIComponent(message)}`;
+        }
+
+        // Render Service Card
+        function createServiceCard(service) {
+            const waUrl = generateWhatsAppUrl(service.name, service.price);
+            return `
+                <div class="service-card bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-100 dark:border-gray-700/60 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-brand-50 dark:bg-brand-900/40 text-brand-600 dark:text-brand-300 flex items-center justify-center text-lg">
+                                <i class="fa-solid ${service.icon}"></i>
+                            </div>
+                            <span class="text-lg font-bold text-gray-900 dark:text-white">₹${service.price}</span>
+                        </div>
+                        <h3 class="font-bold text-gray-800 dark:text-white text-base mb-1 group-hover:text-brand-600 transition-colors">${service.name}</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Professional quality & customized fitting</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700/60">
+                        <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="w-full bg-emerald-50 hover:bg-emerald-500 text-emerald-700 hover:text-white dark:bg-emerald-950/40 dark:text-emerald-300 dark:hover:bg-emerald-600 py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-sm"></i>
+                            Inquire on WhatsApp
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderServices() {
+            document.getElementById('beauty-list').innerHTML = beautyServices.map(createServiceCard).join('');
+            document.getElementById('tailor-list').innerHTML = tailorServices.map(createServiceCard).join('');
+        }
+
+        // Drawer Toggle Logic
+        function toggleSettingsDrawer() {
+            const drawer = document.getElementById('settings-drawer');
+            const overlay = document.getElementById('settings-overlay');
+            const isHidden = drawer.classList.contains('translate-x-full');
+
+            if (isHidden) {
+                drawer.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+            } else {
+                drawer.classList.add('translate-x-full');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            }
+        }
+
+        // Theme Setters
+        function setTheme(mode) {
+            const lightBtn = document.getElementById('theme-light-btn');
+            const darkBtn = document.getElementById('theme-dark-btn');
+
+            if (mode === 'dark') {
+                document.documentElement.classList.add('dark');
+                darkBtn.classList.add('bg-white', 'dark:bg-gray-700', 'shadow');
+                lightBtn.classList.remove('bg-white', 'shadow');
+            } else {
+                document.documentElement.classList.remove('dark');
+                lightBtn.classList.add('bg-white', 'shadow');
+                darkBtn.classList.remove('bg-white', 'dark:bg-gray-700', 'shadow');
+            }
+        }
+
+        function changeFontFamily(font) {
+            document.documentElement.style.setProperty('--font-family-current', font);
+            document.getElementById('font-select').value = font;
+        }
+
+        function changeFontSize(size) {
+            document.documentElement.style.setProperty('--base-font-size', size + 'px');
+            document.getElementById('font-size-val').innerText = size + 'px';
+        }
+
+        // Color Palettes
+        const palettes = {
+            rose: { 50: '#fdf2f8', 100: '#fce7f3', 500: '#ec4899', 600: '#db2777', 700: '#be185d', 800: '#9d174d' },
+            emerald: { 50: '#ecfdf5', 100: '#d1fae5', 500: '#10b981', 600: '#059669', 700: '#047857', 800: '#065f46' },
+            gold: { 50: '#fffbeb', 100: '#fef3c7', 500: '#f59e0b', 600: '#d97706', 700: '#b45309', 800: '#92400e' },
+            purple: { 50: '#faf5ff', 100: '#f3e8ff', 500: '#a855f7', 600: '#9333ea', 700: '#7e22ce', 800: '#6b21a8' },
+            ruby: { 50: '#fff1f2', 100: '#ffe4e6', 500: '#f43f5e', 600: '#e11d48', 700: '#be123c', 800: '#9f1239' }
+        };
+
+        function setPalette(name) {
+            const pal = palettes[name] || palettes.rose;
+            const root = document.documentElement;
+            root.style.setProperty('--color-brand-50', pal[50]);
+            root.style.setProperty('--color-brand-100', pal[100]);
+            root.style.setProperty('--color-brand-500', pal[500]);
+            root.style.setProperty('--color-brand-600', pal[600]);
+            root.style.setProperty('--color-brand-700', pal[700]);
+            root.style.setProperty('--color-brand-800', pal[800]);
+        }
+
+        function resetCustomizations() {
+            setTheme('light');
+            changeFontFamily("'Inter', sans-serif");
+            changeFontSize(18);
+            document.getElementById('font-size-slider').value = 18;
+            setPalette('rose');
+        }
+
+        let currentReviewIndex = 0;
+        let reviewAutoInterval;
+
+        function renderTestimonials() {
+            const track = document.getElementById('carousel-track');
+            track.innerHTML = '';
+
+            reviewsData.forEach((rev, idx) => {
+                const cardWrapper = document.createElement('div');
+                // Responsive widths: 1 card on mobile, 2 on tablet, 3 cards visible on desktop (33.333%)
+                cardWrapper.className = 'w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-3 py-2';
+                
+                cardWrapper.innerHTML = `
+                    <div id="review-card-${idx}" class="testimonial-card bg-white dark:bg-gray-800 p-6 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-md h-full flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-amber-400 text-sm mb-3">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 dark:text-gray-200 text-sm italic mb-4">"${rev.text}"</p>
+                        </div>
+                        <div class="border-t border-gray-100 dark:border-gray-700 pt-3">
+                            <div class="font-bold text-gray-900 dark:text-white text-sm">${rev.name}</div>
+                            <div class="text-xs text-gray-400 dark:text-gray-500">${rev.location}</div>
+                        </div>
+                    </div>
+                `;
+                track.appendChild(cardWrapper);
+            });
+
+            // Render Dots
+            const dotsContainer = document.getElementById('carousel-dots');
+            dotsContainer.innerHTML = reviewsData.map((_, i) => `
+                <button onclick="jumpToReview(${i})" class="w-3 h-3 rounded-full transition-all ${i === 0 ? 'bg-brand-600 scale-125' : 'bg-gray-300 dark:bg-gray-700'}"></button>
+            `).join('');
+
+            updateCarouselView();
+        }
+
+        function updateCarouselView() {
+            const track = document.getElementById('carousel-track');
+            const total = reviewsData.length;
+            const isDesktop = window.innerWidth >= 1024;
+            const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+
+            // Calculate Translate Percentage
+            let cardWidthPercent = 100;
+            if (isDesktop) cardWidthPercent = 33.3333;
+            else if (isTablet) cardWidthPercent = 50;
+
+            track.style.transform = `translateX(-${currentReviewIndex * cardWidthPercent}%)`;
+
+            // Identify Active Center Card Index
+            let activeIndex = currentReviewIndex;
+            if (isDesktop) {
+                activeIndex = (currentReviewIndex + 1) % total; // Center of 3 cards
+            }
+
+            reviewsData.forEach((_, idx) => {
+                const el = document.getElementById(`review-card-${idx}`);
+                if (el) {
+                    if (idx === activeIndex) {
+                        el.classList.add('is-active', 'border-brand-500', 'shadow-2xl');
+                        el.classList.remove('is-side');
+                    } else {
+                        el.classList.add('is-side');
+                        el.classList.remove('is-active', 'border-brand-500', 'shadow-2xl');
+                    }
+                }
+            });
+
+            // Update Dots
+            const dots = document.getElementById('carousel-dots').children;
+            for (let i = 0; i < dots.length; i++) {
+                if (i === activeIndex) {
+                    dots[i].className = 'w-3 h-3 rounded-full bg-brand-600 scale-125 transition-all';
+                } else {
+                    dots[i].className = 'w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700 transition-all';
+                }
+            }
+        }
+
+        function moveCarousel(direction) {
+            const total = reviewsData.length;
+            currentReviewIndex = (currentReviewIndex + direction + total) % total;
+            updateCarouselView();
+        }
+
+        function jumpToReview(index) {
+            const isDesktop = window.innerWidth >= 1024;
+            currentReviewIndex = isDesktop ? (index - 1 + reviewsData.length) % reviewsData.length : index;
+            updateCarouselView();
+        }
+
+        function startReviewTimer() {
+            clearInterval(reviewAutoInterval);
+            reviewAutoInterval = setInterval(() => {
+                moveCarousel(1);
+            }, 3500); // 3.5s auto loop
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('scroll-top-btn');
+            if (window.scrollY > 300) {
+                btn.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                btn.classList.add('opacity-0', 'pointer-events-none');
+            }
+        });
+
+        window.addEventListener('resize', updateCarouselView);
+
+        // Window Load
+        window.onload = function() {
+            renderServices();
+            renderTestimonials();
+            setTheme('light');
+            startReviewTimer();
+
+            document.getElementById('year-copy').innerText = new Date().getFullYear();
+
+            // Pause review auto slide on mouse hover
+            const wrapper = document.getElementById('carousel-wrapper');
+            wrapper.addEventListener('mouseenter', () => clearInterval(reviewAutoInterval));
+            wrapper.addEventListener('mouseleave', startReviewTimer);
+        };
+    </script>
+</body>
+</html>
