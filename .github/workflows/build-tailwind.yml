@@ -19,15 +19,26 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
-          cache: npm
+
+      - name: Check project files
+        run: |
+          test -f package.json || {
+            echo "ERROR: package.json is missing from repository root"
+            exit 1
+          }
+
+          test -f src/input.css || {
+            echo "ERROR: src/input.css is missing"
+            exit 1
+          }
 
       - name: Install dependencies
         run: npm install
@@ -41,11 +52,11 @@ jobs:
       - name: Verify generated CSS
         run: |
           if [ ! -s src/output.css ]; then
-            echo "ERROR: src/output.css was not generated."
+            echo "ERROR: src/output.css was not generated"
             exit 1
           fi
 
-          echo "Tailwind CSS generated successfully."
+          echo "Tailwind CSS generated successfully"
           ls -lh src/output.css
 
       - name: Commit generated CSS
@@ -56,7 +67,7 @@ jobs:
           git add src/output.css
 
           if git diff --cached --quiet; then
-            echo "No CSS changes to commit."
+            echo "No CSS changes to commit"
           else
             git commit -m "build: update Tailwind CSS"
             git push origin HEAD:main
