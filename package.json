@@ -2,15 +2,11 @@
   "name": "beauty-parlour-tailoring-stitching",
   "version": "1.0.0",
   "description": "Shital Beauty Parlour & Tailor Website",
-  "main": "./src/script.js",
-  /*"scripts": {
-    "build:css": "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --minify",
-    "watch:css": "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch"
-  },*/
+  "main": "./src/script.js",  
   "scripts": {
-    "dev": "tailwindcss -i ./assets/css/tailwind.css -o ./assets/css/tailwind.min.css --watch",
-    "build": "tailwindcss -i ./assets/css/tailwind.css -o ./assets/css/tailwind.min.css --minify",
-    "build:css": "tailwindcss -i ./assets/css/tailwind.css -o ./assets/css/tailwind.min.css --minify"
+    "dev": "tailwindcss -i ./src/input.css -o ./src/output.css --watch",
+    "build": "tailwindcss -i ./src/input.css -o ./src/output.css --minify",
+    "build:css": "tailwindcss -i ./src/input.css -o ./src/output.css --minify"
   },
   "keywords": [],
   "author": "",
