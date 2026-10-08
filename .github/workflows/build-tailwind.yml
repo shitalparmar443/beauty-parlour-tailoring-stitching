@@ -1,9 +1,12 @@
+
 name: Build Tailwind CSS
 
 on:
   push:
     branches:
       - main
+    paths-ignore:
+      - "src/output.css"
 
   workflow_dispatch:
 
@@ -17,25 +20,28 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
 
       - name: Install dependencies
         run: npm install
 
       - name: Verify Tailwind CLI
-        run: npx tailwindcss --help
+        run: npx @tailwindcss/cli --help
 
       - name: Build Tailwind CSS
         run: npm run build:css
 
-      - name: Check generated CSS
+      - name: Verify generated CSS
         run: |
-          if [ ! -f src/output.css ]; then
-            echo "ERROR: Tailwind CSS was not generated."
+          if [ ! -s src/output.css ]; then
+            echo "ERROR: src/output.css was not generated."
             exit 1
           fi
 
@@ -47,11 +53,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add assets/css/tailwind.min.css
+          git add src/output.css
 
           if git diff --cached --quiet; then
             echo "No CSS changes to commit."
           else
             git commit -m "build: update Tailwind CSS"
-            git push
+            git push origin HEAD:main
           fi
